@@ -1,0 +1,41 @@
+.select-types {
+	cursor: pointer;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background: rgba(98, 170, 200, 0.3);
+	border-radius: 15px;
+	border: 1px solid white;
+	outline: none;
+
+	padding: 5px 35px 5px 15px;
+	margin-bottom: 10px;
+}
+
+select:focus > option:checked { 
+    background: rgba(77, 86, 89, 0.2) !important;
+}
+
+.select-wrapper select::-ms-expand {
+	display: none;
+}
+
+.select-wrapper {
+	position: relative;
+}
+
+.select-wrapper::before {
+	content: '';
+	position: absolute;
+	top: 40%;
+	right: 15px;
+	transform: translateY(-50%);
+	display: block;
+	pointer-events: none;
+
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 10.4px 6px 0 6px;
+	border-color: grey transparent transparent transparent;
+}

@@ -1,0 +1,79 @@
+.service-main {
+	margin: 0;
+	min-height: 100%;
+	background: #c4daf1;
+	font-family: 'Montserrat';
+	color: black;
+	font-size: 20px;
+}
+
+.service-wrapper {
+	min-height: 774px;
+	max-width: 1420px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.service-container {
+	width: 100%;
+	min-height: 670px;
+	border-radius: 15px;
+	background-color: rgba(80, 198, 205, 0.3);
+	display: flex;
+	flex-direction: column;
+}
+
+.first-half {
+	display: flex;
+	flex-direction: row;
+}
+
+.second-half {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.service-subtitle {
+	width: 746px;
+	min-height: 206px;
+	font-weight: 500;
+	font-size: 26px;
+	text-align: justify;
+	margin: 80px;
+}
+
+.service-footer {
+	margin: 10px 60px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.service-description {
+	width: 1300px;
+	height: 216px;
+	font-size: 24px;
+	text-align: justify;
+	margin: 15px 60px;
+}
+
+.service-price {
+	display: flex;
+	font-size: 24px;
+}
+
+.service-price > .cost {
+	font-weight: 700;
+	margin-right: 15px;
+}
+
+.service-button {
+	margin-bottom: 5px;
+	background: linear-gradient(142deg, rgba(97, 169, 200, 1) 1.39%, rgba(38, 113, 144, 0.41) 100%);
+	border: none;
+	border-radius: 105px;
+	width: 350px;
+	height: 42px;
+	font-size: 20px;
+	color: #fff;
+}

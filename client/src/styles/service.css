@@ -1,0 +1,86 @@
+.catalog-main {
+	margin: 0;
+	min-height: 100%;
+	background: #c4daf1;
+	font-family: 'Montserrat';
+	color: black;
+	font-size: 20px;
+}
+
+.wrapper-service {
+	min-height: 774px;
+	max-width: 1420px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.item {
+	display: flex;
+	justify-content: space-between;
+	border-radius: 15px;
+	background-color: rgba(80, 198, 205, 0.3);
+	width: 100%;
+	height: 200px;
+	margin-bottom: 20px;
+}
+
+.item > img {
+	width: 280px;
+	height: 200px;
+	border-radius: 15px 0 0 15px;
+}
+
+.title-item {
+	padding-left: 60px;
+	text-align: left;
+	font-weight: 600;
+	font-size: 28px;
+}
+
+.description-item {
+	text-align: justify;
+	padding: 0 60px;
+	width: 1120px;
+}
+
+.footer-item {
+	padding: 10px 60px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.footer-item > button {
+	background: linear-gradient(142deg, rgba(97, 169, 200, 1) 1.39%, rgba(38, 113, 144, 0.41) 100%);
+	border: none;
+	border-radius: 105px;
+	width: 160px;
+	height: 42px;
+	font-weight: 400;
+	font-size: 20px;
+	color: #fff;
+}
+
+.main-item {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.price-item {
+	font-weight: 600;
+	font-size: 22px;
+}
+
+.title {
+	font-size: 2em;
+	font-weight: bold;
+	padding: 20px 0 0;
+}
+
+.catalog-title {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: end;
+}

@@ -1,0 +1,163 @@
+.test {
+	margin: 0;
+	height: 774px;
+	background-image: url('../images/background.svg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	font-family: 'Montserrat';
+	color: black;
+	font-size: 20px;
+}
+
+header {
+	border-bottom: 1px solid #a3c0e8;
+}
+
+.nav {
+	font-size: 22px;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	width: 900px;
+	list-style-type: none;
+	justify-content: space-between;
+}
+
+.nav > li {
+	margin: 0 10px 0;
+}
+
+.nav > li > a {
+	text-decoration: none;
+	color: black;
+}
+
+.wrapper {
+	max-width: 1420px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.container-header {
+	height: 55px;
+	margin-top: 15px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.logo {
+	display: flex;
+
+	align-items: center;
+}
+
+.logo-description {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.logo-description > p {
+	margin: 0;
+	font-size: 14px;
+}
+
+.logo-description > .bold {
+	margin: 0;
+	font-weight: 900;
+	letter-spacing: 0.2em;
+	font-size: 20px;
+}
+
+.logo > img {
+	width: 50px;
+	height: 50px;
+	margin-right: 25px;
+}
+
+.offer {
+	padding-top: 60px;
+	font-family: 'Montserrat';
+}
+
+.offer > h1 {
+	font-weight: 700;
+	font-size: 36px;
+}
+
+.offer > p {
+	width: 880px;
+	font-weight: 400;
+	font-size: 32px;
+}
+
+.offer > button {
+	background: linear-gradient(142deg, rgba(97, 169, 200, 1) 1.39%, rgba(38, 113, 144, 0.41) 100%);
+	border-radius: 105px;
+	border: none;
+	width: 472px;
+	height: 86px;
+	font-weight: 400;
+	font-size: 32px;
+	color: #fff;
+}
+
+footer {
+	display: block;
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	height: 100px;
+	background: #62aac8;
+	font-size: 16px;
+}
+
+.container-footer {
+	margin-top: 3px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	color: white;
+}
+
+.footer-address {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 300px;
+	text-align: left;
+}
+
+.footer-address > p {
+	margin: 0;
+}
+
+.footer-catalog {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 300px;
+	text-align: center;
+}
+
+.footer-catalog > p {
+	margin: 0;
+}
+
+.footer-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 300px;
+	text-align: right;
+}
+
+.footer-info > p {
+	margin: 0;
+}
+
+.container-footer > section > .bold {
+	font-weight: 600;
+}
