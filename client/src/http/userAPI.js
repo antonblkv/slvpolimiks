@@ -18,6 +18,11 @@ export const fetchOneUser = async () => {
 	return data;
 };
 
+export const updateUser = async user => {
+	const { data } = await $authHost.put('api/user/lk', user);
+	return data;
+};
+
 export const check = async () => {
 	const { data } = await $authHost.get('api/user/auth');
 	localStorage.setItem('token', data.token);

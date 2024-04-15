@@ -41,6 +41,36 @@ class UserController {
 		return res.json({ token });
 	}
 
+	async updateUser(req, res, next) {
+		let { name, phone, email, password } = req.body;
+		const token = req.headers.authorization.split(' ')[1];
+		const decoded = jwt.verify(token, process.env.SECRET_KEY);
+		const id = decoded.id;
+
+		const user = await User.findOne({
+			where: { id },
+		});
+
+		if (name) {
+			await user.update({ name });
+		}
+
+		if (password) {
+			password = await bcrypt.hash(password, 5);
+			await user.update({ password });
+		}
+
+		if (phone) {
+			await user.update({ phone });
+		}
+
+		if (email) {
+			await user.update({ email });
+		}
+
+		return res.json(user);
+	}
+
 	async getOneUser(req, res, next) {
 		const token = req.headers.authorization.split(' ')[1];
 		const decoded = jwt.verify(token, process.env.SECRET_KEY);
