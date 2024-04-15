@@ -1,11 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 import { Context } from '../index';
 import '../styles/lk.css';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
+import { fetchOneUser } from '../http/userAPI';
 
-const PersonalAccount = () => {
+const PersonalAccount = observer(() => {
 	const { user } = useContext(Context);
+	const currentUser = user.oneUser;
+	
+	useEffect(() => {
+		fetchOneUser().then(data => user.setUser(data));
+	}, [])
 
 	const logOut = () => {
 		localStorage.removeItem('token');
@@ -25,19 +31,19 @@ const PersonalAccount = () => {
 						<div className='user-data'>
 							<h2 className='user-data-title'>Мои данные</h2>
 							<Form className='form-container'>
-								<Form.Control className='form-lk' />
+								<Form.Control className='form-lk' placeholder={currentUser.name} />
 
-								<Form.Control className='form-lk' placeholder='Введите название устройства' />
+								<Form.Control className='form-lk' placeholder={currentUser.phone} />
 
-								<button className='button-exit' onClick={()=> logOut()}>Выйти</button>
+								<button className='button-exit' onClick={() => logOut()}>
+									Выйти
+								</button>
 
-								<Form.Control className='form-lk' placeholder='Введите название устройства' />
+								<Form.Control className='form-lk' placeholder={currentUser.email} />
 
-								<Form.Control className='form-lk' placeholder='Введите название устройства' />
+								<Form.Control className='form-lk' placeholder={currentUser.password} />
 
 								<button className='button-save'>Сохранить</button>
-								
-
 							</Form>
 						</div>
 					</div>
@@ -45,6 +51,6 @@ const PersonalAccount = () => {
 			</div>
 		</main>
 	);
-};
+});
 
 export default PersonalAccount;

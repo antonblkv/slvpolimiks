@@ -41,6 +41,16 @@ class UserController {
 		return res.json({ token });
 	}
 
+	async getOneUser(req, res, next) {
+		const token = req.headers.authorization.split(' ')[1];
+		const decoded = jwt.verify(token, process.env.SECRET_KEY);
+		const id = decoded.id;
+		const user = await User.findOne({
+			where: { id },
+		});
+		return res.json(user);
+	}
+
 	async check(req, res, next) {
 		const token = generateJwt(req.user.id, req.user.phone, req.user.role);
 		return res.json({ token });

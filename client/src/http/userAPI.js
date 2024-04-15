@@ -13,6 +13,11 @@ export const login = async (phone, password) => {
 	return jwtDecode(data.token);
 };
 
+export const fetchOneUser = async () => {
+	const { data } = await $authHost.get('api/user/lk');
+	return data;
+};
+
 export const check = async () => {
 	const { data } = await $authHost.get('api/user/auth');
 	localStorage.setItem('token', data.token);
