@@ -8,6 +8,7 @@ import { LOGIN_ROUTE, REGISTRATION_ROUTE, MAIN_ROUTE } from '../utils/consts';
 import { login, registration } from '../http/userAPI';
 import { observer } from 'mobx-react-lite';
 import { Context } from '../index';
+import '../styles/auth.css'
 
 const Auth = observer(() => {
 	const { user } = useContext(Context);
@@ -34,40 +35,45 @@ const Auth = observer(() => {
 	};
 
 	return (
-		<Container className='d-flex justify-content-center align-items-center' style={{ height: window.innerHeight - 54 }}>
-			<Card style={{ width: 600 }} className='p-5'>
-				<h2 className='m-auto'>{isLogin ? 'Авторизация' : 'Регистрация'}</h2>
-				<Form className='d-flex flex-column'>
-					<Form.Control
-						className='mt-3'
-						placeholder='Введите Ваш номер телефона...'
-						value={phone}
-						onChange={e => setPhone(e.target.value)}
-					/>
-					<Form.Control
-						className='mt-3'
-						placeholder='Введите Ваш пароль...'
-						type='password'
-						value={password}
-						onChange={e => setPassword(e.target.value)}
-					/>
-					<Row className='d-flex justify-content-between mt-3 pl-3 pr-3'>
+		<main className='auth-main'>
+			<div className='auth-wrapper'>
+				<div className='auth-body'>
+					<div className='auth-title'>
+						<h1 className='title'>{isLogin ? 'Авторизация' : 'Регистрация'}</h1>
+					</div>
+					<Form className='auth-form'>
+						<Form.Control
+							className='auth-input'
+							placeholder='Номер телефона'
+							value={phone}
+							onChange={e => setPhone(e.target.value)}
+						/>
+						<Form.Control
+							className='auth-input'
+							placeholder='Пароль'
+							type='password'
+							value={password}
+							onChange={e => setPassword(e.target.value)}
+						/>
+						<button className='button-auth' onClick={click}>
+							{isLogin ? 'Войти' : 'Регистрация'}
+						</button>
+
 						{isLogin ? (
-							<div>
-								Нет аккаунта? <NavLink to={REGISTRATION_ROUTE}>Зарегистрируйся!</NavLink>
+							<div className='auth-form-footer'>
+								<p>Нет аккаунта?</p>
+								<a onClick={() => history(REGISTRATION_ROUTE)}>Зарегистрируйся!</a>
 							</div>
 						) : (
-							<div>
-								Есть аккаунт? <NavLink to={LOGIN_ROUTE}>Войдите!</NavLink>
+							<div className='auth-form-footer'>
+								<p>Есть аккаунт?</p>
+								<a onClick={() => history(LOGIN_ROUTE)}>Войдите!</a>
 							</div>
 						)}
-						<Button variant={'outline-success'} onClick={click}>
-							{isLogin ? 'Войти' : 'Регистрация'}
-						</Button>
-					</Row>
-				</Form>
-			</Card>
-		</Container>
+					</Form>
+				</div>
+			</div>
+		</main>
 	);
 });
 
