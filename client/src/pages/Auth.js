@@ -1,14 +1,11 @@
-import React, { useContext, useState } from 'react';
-import { Container, Form } from 'react-bootstrap';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { LOGIN_ROUTE, REGISTRATION_ROUTE, MAIN_ROUTE } from '../utils/consts';
-import { login, registration } from '../http/userAPI';
 import { observer } from 'mobx-react-lite';
+import React, { useContext, useState } from 'react';
+import { Form } from 'react-bootstrap';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { login, registration } from '../http/userAPI';
 import { Context } from '../index';
-import '../styles/auth.css'
+import '../styles/auth.css';
+import { LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE } from '../utils/consts';
 
 const Auth = observer(() => {
 	const { user } = useContext(Context);
@@ -55,22 +52,21 @@ const Auth = observer(() => {
 							value={password}
 							onChange={e => setPassword(e.target.value)}
 						/>
-						<button className='button-auth' onClick={click}>
-							{isLogin ? 'Войти' : 'Регистрация'}
-						</button>
-
-						{isLogin ? (
-							<div className='auth-form-footer'>
-								<p>Нет аккаунта?</p>
-								<a onClick={() => history(REGISTRATION_ROUTE)}>Зарегистрируйся!</a>
-							</div>
-						) : (
-							<div className='auth-form-footer'>
-								<p>Есть аккаунт?</p>
-								<a onClick={() => history(LOGIN_ROUTE)}>Войдите!</a>
-							</div>
-						)}
 					</Form>
+					<button className='button-auth' onClick={click}>
+						{isLogin ? 'Войти' : 'Регистрация'}
+					</button>
+					{isLogin ? (
+						<div className='auth-form-footer'>
+							<p>Нет аккаунта?</p>
+							<a onClick={() => history(REGISTRATION_ROUTE)}>Зарегистрируйся!</a>
+						</div>
+					) : (
+						<div className='auth-form-footer'>
+							<p>Есть аккаунт?</p>
+							<a onClick={() => history(LOGIN_ROUTE)}>Войдите!</a>
+						</div>
+					)}
 				</div>
 			</div>
 		</main>
