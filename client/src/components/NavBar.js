@@ -10,12 +10,6 @@ const NavBar = observer(() => {
 	const history = useNavigate();
 	const location = useLocation();
 
-	const logOut = () => {
-		localStorage.removeItem('token');
-		user.setUser({});
-		user.setIsAuth(false);
-	};
-
 	const link_catalog =
 		location.pathname === CATALOG_ROUTE
 			? {
@@ -75,8 +69,8 @@ const NavBar = observer(() => {
 				</li>
 				<li>
 					{user.isAuth ? (
-						<a style={link_lk} href='' onClick={() => logOut()}>
-							Выйти
+						<a style={link_lk} href='' onClick={() => history(LK_ROUTE)}>
+							Личный кабинет
 						</a>
 					) : (
 						<a style={link_login} href='' onClick={() => history(LOGIN_ROUTE)}>
