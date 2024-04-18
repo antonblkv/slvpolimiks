@@ -7,7 +7,7 @@ import close from '../../images/close.svg';
 import { Context } from '../../index';
 import '../../styles/createService.css';
 
-const SubmitApplication = observer(({ show, onHide }) => {
+const CreateOrder = observer(({ show, onHide }) => {
 	const { service } = useContext(Context);
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
@@ -68,9 +68,7 @@ const SubmitApplication = observer(({ show, onHide }) => {
 
 					<div class='checkbox'>
 						<input type='checkbox' id='checkbox' className='modal-checkbox' />
-						<label  className='modal-checkbox-label'>
-							Даю согласие на обработку персональных данных
-						</label>
+						<label className='modal-checkbox-label'>Даю согласие на обработку персональных данных</label>
 					</div>
 
 					<button className='modal-button'>Перезвоните мне</button>
@@ -80,4 +78,4 @@ const SubmitApplication = observer(({ show, onHide }) => {
 	);
 });
 
-export default SubmitApplication;
+export default CreateOrder;

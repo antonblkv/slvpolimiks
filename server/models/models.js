@@ -10,18 +10,15 @@ const User = sequelize.define('user', {
 	name: { type: DataTypes.STRING },
 });
 
-const List = sequelize.define('list', {
+const Order = sequelize.define('order', {
 	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-});
-
-const ListedService = sequelize.define('list_service', {
-	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+	comment: { type: DataTypes.STRING },
+	status: { type: DataTypes.ENUM('Зарегистрирована', 'В очереди', 'В работе', 'Выполнена', 'Отклонена'), defaultValue: 'Зарегистрирована' },
 });
 
 const Service = sequelize.define('service', {
 	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 	name: { type: DataTypes.STRING, unique: true, allowNull: false },
-	subtitle: { type: DataTypes.STRING },
 	description: { type: DataTypes.STRING },
 	price: { type: DataTypes.INTEGER, allowNull: false },
 	img: { type: DataTypes.STRING, allowNull: false },
@@ -38,35 +35,19 @@ const Portfolio = sequelize.define('portfolio', {
 	description: { type: DataTypes.STRING },
 });
 
-const Review = sequelize.define('review', {
-	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-	description: { type: DataTypes.STRING },
-});
+User.hasMany(Order);
+Order.belongsTo(User);
 
-User.hasOne(List);
-List.belongsTo(User);
-
-User.hasMany(Review);
-Review.belongsTo(User);
-
-List.hasMany(ListedService);
-ListedService.belongsTo(List);
+Service.hasMany(Order);
+Order.belongsTo(Service);
 
 Type.hasMany(Service);
 Service.belongsTo(Type);
 
-Service.hasMany(Review);
-Review.belongsTo(Service);
-
-Service.hasMany(ListedService);
-ListedService.belongsTo(Service);
-
 module.exports = {
 	User,
-	List,
-	ListedService,
+	Order,
 	Service,
 	Type,
-	Review,
 	Portfolio,
 };

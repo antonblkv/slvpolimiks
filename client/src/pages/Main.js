@@ -1,8 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React, { useState } from 'react';
-import SubmitApplication from '../components/modals/SubmitApplication';
+import CreateOrder from '../components/modals/CreateOrder';
 import '../styles/main.css';
-
 
 const Main = observer(() => {
 	const [applicationVisible, setApplicationVisible] = useState(false);
@@ -17,7 +16,7 @@ const Main = observer(() => {
 				</section>
 			</div>
 
-			<SubmitApplication show={applicationVisible} onHide={() => setApplicationVisible(false)}></SubmitApplication>
+			<CreateOrder show={applicationVisible} onHide={() => setApplicationVisible(false)}></CreateOrder>
 		</main>
 	);
 });

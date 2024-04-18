@@ -1,7 +1,7 @@
 const ApiError = require('../error/ApiError');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { User, List } = require('../models/models');
+const { User } = require('../models/models');
 
 const generateJwt = (id, phone, role) => {
 	return jwt.sign({ id, phone, role }, process.env.SECRET_KEY, {
@@ -12,17 +12,25 @@ const generateJwt = (id, phone, role) => {
 class UserController {
 	async registration(req, res, next) {
 		const { phone, password, role } = req.body;
+		const hashPassword = await bcrypt.hash(password, 5);
+
 		if (!phone || !password) {
 			return next(ApiError.badRequest('Некорректный номер телефона или пароль'));
 		}
 
-		const candidate = await User.findOne({ where: { phone } });
-		if (candidate) {
+		let user = await User.findOne({ where: { phone } });
+
+		if (user) {
+			if (user.password === null) {
+				await user.update({ password: hashPassword });
+				const token = generateJwt(user.id, user.phone, user.role);
+				return res.json({ token });
+			}
 			return next(ApiError.badRequest('Пользователь с таким номером телефона уже существует'));
 		}
-		const hashPassword = await bcrypt.hash(password, 5);
-		const user = await User.create({ phone, role, password: hashPassword });
-		const list = await List.create({ userId: user.id });
+
+
+		user = await User.create({ phone, role, password: hashPassword });
 		const token = generateJwt(user.id, user.phone, user.role);
 		return res.json({ token });
 	}
