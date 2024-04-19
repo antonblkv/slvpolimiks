@@ -27,7 +27,7 @@ class OrderController {
 	}
 
 	async getAll(req, res) {
-		let orders = await Order.findAll();
+		const orders = await Order.findAll();
 
 		return res.json(orders);
 	}

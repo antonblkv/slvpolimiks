@@ -74,3 +74,62 @@
 	border: none;
 	background: linear-gradient(142deg, rgba(200, 97, 97, 1) 1.39%, rgba(38, 113, 144, 0.41) 100%);
 }
+
+.table-orders {
+	margin-top: 15px;
+	display: flex;
+	flex-direction: column;
+	border-radius: 8px;
+}
+
+.head-orders {
+	height: 40px;
+	border: none;
+	text-align: center;
+	border-radius: 8px;
+	margin-bottom: 10px;
+}
+
+.row-orders {
+	background-color: #ddfdff;
+	height: 40px;
+	border: none;
+	text-align: center;
+	border-radius: 8px;
+	margin-bottom: 10px;
+}
+
+.row-orders > th {
+	background-color: rgba(98, 170, 200, 0.8);
+}
+
+.row-orders > th:first-child  {
+	border-radius: 8px 0 0 8px;
+}
+
+.row-orders > th:last-child  {
+	border-radius: 0 8px 8px 0;
+}
+
+.th-comment, .comment-order {
+	text-align: center;
+	width: 660px;
+}
+
+.th-number,
+.number-order {
+	border: none;
+	width: 100px;
+}
+
+.th-name,
+.th-status,
+.name-order,
+.status-order {
+	border: none;
+	width: 330px;
+}
+
+th, td {
+	padding: 5px;
+}
