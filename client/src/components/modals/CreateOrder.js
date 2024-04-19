@@ -2,34 +2,22 @@ import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
-import { createService, fetchTypes } from '../../http/serviceAPI';
 import close from '../../images/close.svg';
 import { Context } from '../../index';
 import '../../styles/createService.css';
+import { createOrder } from '../../http/orderApi';
 
 const CreateOrder = observer(({ show, onHide }) => {
-	const { service } = useContext(Context);
 	const [name, setName] = useState('');
-	const [description, setDescription] = useState('');
-	const [price, setPrice] = useState();
-	const [file, setFile] = useState(null);
+	const [phone, setPhone] = useState('');
+	const [comment, setComment] = useState('');
 
-	useEffect(() => {
-		fetchTypes().then(data => service.setTypes(data));
-	}, [service]);
-
-	const selectFile = e => {
-		setFile(e.target.files[0]);
-	};
-
-	const addService = () => {
+	const addOrder = () => {
 		const formData = new FormData();
 		formData.append('name', name);
-		formData.append('description', description);
-		formData.append('price', `${price}`);
-		formData.append('img', file);
-		formData.append('typeId', service.selectedType.id);
-		createService(formData).then(data => onHide());
+		formData.append('phone', phone);
+		formData.append('comment', comment);
+		createOrder(formData).then(data => onHide());
 	};
 
 	return (
@@ -52,16 +40,16 @@ const CreateOrder = observer(({ show, onHide }) => {
 					/>
 
 					<Form.Control
-						value={name}
-						onChange={e => setName(e.target.value)}
+						value={phone}
+						onChange={e => setPhone(e.target.value)}
 						className='form form-name'
 						placeholder='Номер телефона'
 					/>
 
 					<Form.Control
 						as='textarea'
-						value={description}
-						onChange={e => setDescription(e.target.value)}
+						value={comment}
+						onChange={e => setComment(e.target.value)}
 						className='form form-description'
 						placeholder='Комментарий'
 					/>
@@ -71,7 +59,7 @@ const CreateOrder = observer(({ show, onHide }) => {
 						<label className='modal-checkbox-label'>Даю согласие на обработку персональных данных</label>
 					</div>
 
-					<button className='modal-button'>Перезвоните мне</button>
+					<button className='modal-button' onClick={addOrder}>Перезвоните мне</button>
 				</Form>
 			</div>
 		</Modal>
