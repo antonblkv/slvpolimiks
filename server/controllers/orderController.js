@@ -27,7 +27,15 @@ class OrderController {
 	}
 
 	async getAll(req, res) {
-		const orders = await Order.findAll();
+		let { userId } = req.query;
+		let orders;
+		if (!userId) {
+			orders = await Order.findAll();
+		} else {
+			orders = await Order.findAll({
+				where: { userId },
+			});
+		}
 
 		return res.json(orders);
 	}

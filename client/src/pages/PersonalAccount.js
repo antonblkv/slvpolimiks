@@ -4,10 +4,13 @@ import { Form } from 'react-bootstrap';
 import { fetchOneUser, updateUser } from '../http/userAPI';
 import { Context } from '../index';
 import '../styles/lk.css';
+import TableOrders from '../components/TableOrders';
+import { fetchOrders } from '../http/orderApi';
 
 const PersonalAccount = observer(() => {
 	const { user } = useContext(Context);
-	const currentUser = user.oneUser;
+	const { order } = useContext(Context);
+	const currentUser = user.user;
 	const [name, setName] = useState('');
 	const [phone, setPhone] = useState('');
 	const [email, setEmail] = useState('');
@@ -16,6 +19,10 @@ const PersonalAccount = observer(() => {
 	useEffect(() => {
 		fetchOneUser().then(data => user.setUser(data));
 	}, []);
+
+		useEffect(() => {
+			fetchOrders(currentUser.id).then(data => order.setOrders(data));
+		}, [currentUser.id]);
 
 	const logOut = () => {
 		localStorage.removeItem('token');
@@ -83,43 +90,7 @@ const PersonalAccount = observer(() => {
 
 					<div className='my-orders'>
 						<h2 className='user-data-title'>Мои заявки</h2>
-						<table className='table-orders'>
-							<thead className='head-orders'>
-								<tr className='row-orders'>
-									<th className='th-number'>№</th>
-									<th className='th-name'>Услуга</th>
-									<th className='th-status'>Статус</th>
-									<th className='th-comment'>Комментарий</th>
-								</tr>
-							</thead>
-							<tr className='row-orders'>
-								<td className='number-order'>1</td>
-								<td className='name-order'>Ландшафтный дизайн</td>
-								<td className='status-order'>В работе</td>
-								<td className='comment-order'>ВЭЖФдазщывлпзджвальщзшпоазщлрлщзап</td>
-							</tr>
-
-							<tr className='row-orders'>
-								<td className='number-order'>2</td>
-								<td className='name-order'>Ландшафтный дизайн</td>
-								<td className='status-order'>В работе</td>
-								<td className='comment-order'>ВЭЖФдазщывлпзджвальщзшпоазщлрлщзап</td>
-							</tr>
-
-							<tr className='row-orders'>
-								<td className='number-order'>3</td>
-								<td className='name-order'>Ландшафтный дизайн</td>
-								<td className='status-order'>В работе</td>
-								<td className='comment-order'>ВЭЖФдазщывлпзджвальщзшпоазщлрлщзап</td>
-							</tr>
-
-							<tr className='row-orders'>
-								<td className='number-order'>4</td>
-								<td className='name-order'>Ландшафтный дизайн</td>
-								<td className='status-order'>В работе</td>
-								<td className='comment-order'>ВЭЖФдазщывлпзджвальщзшпоазщлрлщзап</td>
-							</tr>
-						</table>
+						<TableOrders></TableOrders>
 					</div>
 				</div>
 			</div>

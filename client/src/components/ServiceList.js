@@ -5,7 +5,7 @@ import ServiceItem from "./ServiceItem";
 
 const ServiceList = observer(() => {
     const { service } = useContext(Context)
-
+		
     return (
 			<div class='container-catalog'>
 				{service.services.map(service => (

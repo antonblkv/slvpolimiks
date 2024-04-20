@@ -5,8 +5,12 @@ export const createOrder = async order => {
 	return data;
 };
 
-export const fetchOrders = async () => {
-	const { data } = await $authHost.get('api/order');
+export const fetchOrders = async userId => {
+	const { data } = await $authHost.get('api/order', {
+		params: {
+			userId,
+		}
+	});
 
 	return data;
 };
