@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Context } from '../index';
 import '../styles/nav.css';
-import { CATALOG_ROUTE, LK_ROUTE, LOGIN_ROUTE, PORTFOLIO_ROUTE } from '../utils/consts';
+import { ADMIN_ROUTE, CATALOG_ROUTE, LK_ROUTE, LOGIN_ROUTE, PORTFOLIO_ROUTE } from '../utils/consts';
 
 const NavBar = observer(() => {
 	const { user } = useContext(Context);
@@ -69,9 +69,11 @@ const NavBar = observer(() => {
 				</li>
 				<li>
 					{user.isAuth ? (
-						<a style={link_lk} href='' onClick={() => history(LK_ROUTE)}>
+						user.isAdmin ? (<a style={link_lk} href='' onClick={() => history(ADMIN_ROUTE)}>
+							Админ-панель
+						</a>) : (<a style={link_lk} href='' onClick={() => history(LK_ROUTE)}>
 							Личный кабинет
-						</a>
+						</a>)
 					) : (
 						<a style={link_login} href='' onClick={() => history(LOGIN_ROUTE)}>
 							Войти

@@ -23,8 +23,9 @@ const Auth = observer(() => {
 			} else {
 				data = await registration(phone, password);
 			}
-			user.setUser(user);
+			user.setUser(data);
 			user.setIsAuth(true);
+			user.setIsAdmin(user.user.role === 'ADMIN');
 			history(MAIN_ROUTE);
 		} catch (e) {
 			alert(e.response.data.message);

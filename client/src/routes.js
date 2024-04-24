@@ -9,12 +9,15 @@ import PersonalAccount from './pages/PersonalAccount';
 
 export const authRoutes = [
 	{
-		path: ADMIN_ROUTE,
-		Component: Admin,
-	},
-	{
 		path: LK_ROUTE,
 		Component: PersonalAccount,
+	},
+];
+
+export const adminRoutes = [
+	{
+		path: ADMIN_ROUTE,
+		Component: Admin,
 	},
 ];
 
