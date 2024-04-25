@@ -1,16 +1,16 @@
 import { observer } from 'mobx-react-lite';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
-import close from '../../images/close.svg';
-import { Context } from '../../index';
-import '../../styles/createService.css';
 import { createOrder } from '../../http/orderApi';
+import close from '../../images/close.svg';
+import '../../styles/createService.css';
 
 const CreateOrder = observer(({ show, onHide }) => {
 	const [name, setName] = useState('');
 	const [phone, setPhone] = useState('');
 	const [comment, setComment] = useState('');
+	const [checked, setChecked ] = useState(false);
 
 	const addOrder = () => {
 		const formData = new FormData();
@@ -55,11 +55,19 @@ const CreateOrder = observer(({ show, onHide }) => {
 					/>
 
 					<div class='checkbox'>
-						<input type='checkbox' id='checkbox' className='modal-checkbox' />
+						<input
+							type='checkbox'
+							id='checkbox'
+							className='modal-checkbox'
+							checked={checked}
+							onChange={e => setChecked(e.target.checked)}
+						/>
 						<label className='modal-checkbox-label'>Даю согласие на обработку персональных данных</label>
 					</div>
 
-					<button className='modal-button' onClick={addOrder}>Перезвоните мне</button>
+					<button disabled={!checked} className='modal-button' onClick={addOrder}>
+						Перезвоните мне
+					</button>
 				</Form>
 			</div>
 		</Modal>
