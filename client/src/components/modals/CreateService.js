@@ -69,7 +69,7 @@ const CreateService = observer(({ show, onHide }) => {
 						as='textarea'
 						{...register('description', {
 							required: 'Поле обязательно к заполнению',
-							maxLength: { value: 255, message: 'Максимум 255 символов' }
+							maxLength: { value: 255, message: 'Максимум 255 символов' },
 						})}
 						className='form form-description'
 						placeholder='Описание'
@@ -89,7 +89,7 @@ const CreateService = observer(({ show, onHide }) => {
 					<div className='form-error'>{errors?.price && <p>{errors?.price?.message}</p>}</div>
 
 					<Form.Control className='form form-img' type='file' {...register('img')} />
-					<Form.Control className='modal-button' type='submit' />
+					<Form.Control className='modal-button' type='submit' value={'Добавить'} />
 				</Form>
 			</div>
 		</Modal>

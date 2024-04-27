@@ -80,7 +80,7 @@ const CreateOrder = observer(({ show, onHide }) => {
 					</div>
 					<div className='form-error'>{errors?.check && <p>{errors?.check?.message}</p>}</div>
 
-					<Form.Control className='modal-button' type='submit' />
+					<Form.Control className='modal-button' type='submit' value={'Перезвоните мне'} />
 				</Form>
 			</div>
 		</Modal>
