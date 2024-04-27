@@ -69,6 +69,17 @@ const CreateOrder = observer(({ show, onHide }) => {
 					/>
 					<div className='form-error'>{errors?.comment && <p>{errors?.comment?.message}</p>}</div>
 
+					<div class='checkbox'>
+						<input
+							{...register('check', { required: 'Необходимо Ваше согласие' })}
+							type='checkbox'
+							id='checkbox'
+							className='modal-checkbox'
+						/>
+						<label className='modal-checkbox-label'>Даю согласие на обработку персональных данных</label>
+					</div>
+					<div className='form-error'>{errors?.check && <p>{errors?.check?.message}</p>}</div>
+
 					<Form.Control className='modal-button' type='submit' />
 				</Form>
 			</div>
