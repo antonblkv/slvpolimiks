@@ -1,31 +1,41 @@
 import { observer } from 'mobx-react-lite';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Form } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { login, registration } from '../http/userAPI';
 import { Context } from '../index';
 import '../styles/auth.css';
 import { LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE } from '../utils/consts';
+import { useForm } from 'react-hook-form';
+import InputMask from 'react-input-mask';
 
 const Auth = observer(() => {
 	const { user } = useContext(Context);
 	const location = useLocation();
 	const history = useNavigate();
 	const isLogin = location.pathname === LOGIN_ROUTE;
-	const [phone, setPhone] = useState('');
-	const [password, setPassword] = useState('');
 
-	const click = async () => {
+	const {
+		register,
+		formState: { errors },
+		handleSubmit,
+		reset,
+	} = useForm({ mode: 'onBlur' });
+
+	const onSubmit = async data => {
 		try {
-			let data;
+			let dataUser;
 			if (isLogin) {
-				data = await login(phone, password);
+				dataUser = await login(data.phone, data.password);
 			} else {
-				data = await registration(phone, password);
+				console.log(data.phone);
+				console.log(data.password);
+				dataUser = await registration(data.phone, data.password);
 			}
-			user.setUser(data);
+			user.setUser(dataUser);
 			user.setIsAuth(true);
 			user.setIsAdmin(user.user.role === 'ADMIN');
+			reset();
 			history(MAIN_ROUTE);
 		} catch (e) {
 			alert(e.response.data.message);
@@ -39,24 +49,36 @@ const Auth = observer(() => {
 					<div className='auth-title'>
 						<h1 className='title'>{isLogin ? 'Авторизация' : 'Регистрация'}</h1>
 					</div>
-					<Form className='auth-form'>
+					<Form className='auth-form' onSubmit={handleSubmit(onSubmit)}>
 						<Form.Control
 							className='auth-input'
 							placeholder='Номер телефона'
-							value={phone}
-							onChange={e => setPhone(e.target.value)}
+							as={InputMask}
+							mask='+7 (***) ***-**-**'
+							{...register('phone', {
+								required: 'Поле обязательно к заполнению',
+								pattern: {
+									value: /^\+\d{1,3}\s*\(\d{1,3}\)\s*\d{3}-\d{2}-\d{2}$/,
+									message: 'Необходимо ввести номер полностью',
+								},
+							})}
 						/>
+						<div className='form-error'>{errors?.phone && <p>{errors?.phone?.message}</p>}</div>
+
 						<Form.Control
 							className='auth-input'
 							placeholder='Пароль'
 							type='password'
-							value={password}
-							onChange={e => setPassword(e.target.value)}
+							{...register('password', {
+								required: 'Поле обязательно к заполнению',
+								maxLength: { value: 20, message: 'Максимум 20 символов' },
+								minLength: { value: 6, message: 'Минимум 6 символов' },
+							})}
 						/>
+						<div className='form-error'>{errors?.password && <p>{errors?.password?.message}</p>}</div>
+
+						<Form.Control className='button-auth' type='submit' value={isLogin ? 'Войти' : 'Зарегистрироваться'} />
 					</Form>
-					<button className='button-auth' onClick={click}>
-						{isLogin ? 'Войти' : 'Регистрация'}
-					</button>
 					{isLogin ? (
 						<div className='auth-form-footer'>
 							<p>Нет аккаунта?</p>
