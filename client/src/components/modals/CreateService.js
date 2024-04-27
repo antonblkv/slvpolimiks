@@ -1,35 +1,38 @@
 import { observer } from 'mobx-react-lite';
-import React, { useContext, useEffect, useState } from 'react';
-import { Dropdown, Form } from 'react-bootstrap';
+import React, { useContext, useEffect } from 'react';
+import { Form } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
+import { useForm } from 'react-hook-form';
 import { createService, fetchTypes } from '../../http/serviceAPI';
+import close from '../../images/close.svg';
 import { Context } from '../../index';
 import '../../styles/createService.css';
-import close from '../../images/close.svg';
 
 const CreateService = observer(({ show, onHide }) => {
 	const { service } = useContext(Context);
-	const [name, setName] = useState('');
-	const [description, setDescription] = useState('');
-	const [price, setPrice] = useState();
-	const [file, setFile] = useState(null);
 
 	useEffect(() => {
 		fetchTypes().then(data => service.setTypes(data));
 	}, [service]);
 
-	const selectFile = e => {
-		setFile(e.target.files[0]);
-	};
+	const {
+		register,
+		formState: { errors },
+		handleSubmit,
+		reset,
+	} = useForm({ mode: 'onBlur' });
 
-	const addService = () => {
+	const onSubmit = data => {
 		const formData = new FormData();
-		formData.append('name', name);
-		formData.append('description', description);
-		formData.append('price', `${price}`);
-		formData.append('img', file);
-		formData.append('typeId', service.selectedType.id);
+		for (const key in data) {
+			if (key === 'img') {
+				formData.append(key, data[key][0]);
+			} else {
+				formData.append(key, data[key]);
+			}
+		}
 		createService(formData).then(data => onHide());
+		reset();
 	};
 
 	return (
@@ -39,43 +42,55 @@ const CreateService = observer(({ show, onHide }) => {
 				<img className='modal-x' src={close} alt='Закрыть' onClick={onHide} />
 			</div>
 			<div className='modal-body'>
-				<Form>
-					<Dropdown>
-						<Dropdown.Toggle>{service.selectedType.name || 'Выберите категорию'}</Dropdown.Toggle>
-						<Dropdown.Menu>
-							{service.types.map(type => (
-								<Dropdown.Item onClick={() => service.setSelectedType(type)} key={type.id}>
-									{type.name}
-								</Dropdown.Item>
-							))}
-						</Dropdown.Menu>
-					</Dropdown>
+				<Form onSubmit={handleSubmit(onSubmit)}>
+					<select name='select-types' className='form-select' {...register('typeId')}>
+						<option className='option-type' hidden>
+							Выберите категорию
+						</option>
+						{service.types.map(type => (
+							<option className='option-type' key={type.id} value={type.id}>
+								{type.name}
+							</option>
+						))}
+					</select>
+
 					<Form.Control
-						value={name}
-						onChange={e => setName(e.target.value)}
+						{...register('name', {
+							required: 'Поле обязательно к заполнению',
+							maxLength: { value: 30, message: 'Максимум 30 символов' },
+							pattern: { value: /^[а-яА-Я]*$/, message: 'Только русские буквы' },
+						})}
 						className='form form-name'
-						placeholder='Введите название устройства'
+						placeholder='Введите название услуги'
 					/>
+					<div className='form-error'>{errors?.name && <p>{errors?.name?.message}</p>}</div>
 
 					<Form.Control
 						as='textarea'
-						value={description}
-						onChange={e => setDescription(e.target.value)}
+						{...register('description', {
+							required: 'Поле обязательно к заполнению',
+							maxLength: { value: 255, message: 'Максимум 255 символов' }
+						})}
 						className='form form-description'
 						placeholder='Описание'
 					/>
+					<div className='form-error'>{errors?.description && <p>{errors?.description?.message}</p>}</div>
 
 					<Form.Control
-						value={price}
-						onChange={e => setPrice(Number(e.target.value))}
+						type='number'
+						{...register('price', {
+							required: 'Поле обязательно к заполнению',
+							minLength: { value: 4, message: 'Минимум 4 символа' },
+							maxLength: { value: 9, message: 'Максимум 9 символов' },
+						})}
 						className='form form-price'
-						placeholder='Введите стоимость устройства'
+						placeholder='Введите стоимость услуги'
 					/>
-					<Form.Control className='form form-img' type='file' onChange={selectFile} />
+					<div className='form-error'>{errors?.price && <p>{errors?.price?.message}</p>}</div>
+
+					<Form.Control className='form form-img' type='file' {...register('img')} />
+					<Form.Control className='modal-button' type='submit' />
 				</Form>
-				<button className='modal-button' onClick={addService}>
-					Добавить
-				</button>
 			</div>
 		</Modal>
 	);

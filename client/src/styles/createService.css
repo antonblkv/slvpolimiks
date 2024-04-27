@@ -83,3 +83,27 @@
 	width: 15px;
 	height: 15px;
 }
+
+.form-error {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 130%;
+	color: rgba(200, 97, 97, 1);
+	margin: 0;
+	padding: 0;
+}
+
+.form-select {
+	width: 100%;
+	height: calc(1.5em + 0.75rem + 2px);
+	cursor: pointer;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background: rgba(98, 170, 200, 0.3);
+	border-radius: 15px;
+	border: 1px solid white;
+	outline: none;
+
+	padding: 5px 35px 5px 15px;
+}

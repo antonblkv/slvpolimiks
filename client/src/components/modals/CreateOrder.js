@@ -1,23 +1,24 @@
 import { observer } from 'mobx-react-lite';
-import React, { useState } from 'react';
+import React from 'react';
 import { Form } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
+import { useForm } from 'react-hook-form';
+import InputMask from 'react-input-mask';
 import { createOrder } from '../../http/orderApi';
 import close from '../../images/close.svg';
 import '../../styles/createService.css';
 
 const CreateOrder = observer(({ show, onHide }) => {
-	const [name, setName] = useState('');
-	const [phone, setPhone] = useState('');
-	const [comment, setComment] = useState('');
-	const [checked, setChecked ] = useState(false);
+	const {
+		register,
+		formState: { errors },
+		handleSubmit,
+		reset,
+	} = useForm({ mode: 'onBlur' });
 
-	const addOrder = () => {
-		const formData = new FormData();
-		formData.append('name', name);
-		formData.append('phone', phone);
-		formData.append('comment', comment);
-		createOrder(formData).then(data => onHide());
+	const onSubmit = data => {
+		createOrder(data).then(data => onHide());
+		reset();
 	};
 
 	return (
@@ -31,43 +32,44 @@ const CreateOrder = observer(({ show, onHide }) => {
 			</div>
 			<div className='modal-body'>
 				<div className='modal-subtitle'>Заполните форму для получения консультации</div>
-				<Form>
+				<Form onSubmit={handleSubmit(onSubmit)}>
 					<Form.Control
-						value={name}
-						onChange={e => setName(e.target.value)}
+						{...register('name', {
+							required: 'Поле обязательно к заполнению',
+							maxLength: { value: 20, message: 'Максимум 20 символов' },
+							pattern: { value: /^[а-яА-Я]*$/, message: 'Только русские буквы' },
+						})}
 						className='form form-name'
 						placeholder='Имя'
 					/>
+					<div className='form-error'>{errors?.name && <p>{errors?.name?.message}</p>}</div>
 
 					<Form.Control
-						value={phone}
-						onChange={e => setPhone(e.target.value)}
+						as={InputMask}
+						mask='+7 (***) ***-**-**'
+						{...register('phone', {
+							required: 'Поле обязательно к заполнению',
+							pattern: {
+								value: /^\+\d{1,3}\s*\(\d{1,3}\)\s*\d{3}-\d{2}-\d{2}$/,
+								message: 'Необходимо ввести номер полностью',
+							},
+						})}
 						className='form form-name'
 						placeholder='Номер телефона'
 					/>
+					<div className='form-error'>{errors?.phone && <p>{errors?.phone?.message}</p>}</div>
 
 					<Form.Control
 						as='textarea'
-						value={comment}
-						onChange={e => setComment(e.target.value)}
+						{...register('comment', {
+							maxLength: { value: 255, message: 'Максимум 255 символов' },
+						})}
 						className='form form-description'
 						placeholder='Комментарий'
 					/>
+					<div className='form-error'>{errors?.comment && <p>{errors?.comment?.message}</p>}</div>
 
-					<div class='checkbox'>
-						<input
-							type='checkbox'
-							id='checkbox'
-							className='modal-checkbox'
-							checked={checked}
-							onChange={e => setChecked(e.target.checked)}
-						/>
-						<label className='modal-checkbox-label'>Даю согласие на обработку персональных данных</label>
-					</div>
-
-					<button disabled={!checked} className='modal-button' onClick={addOrder}>
-						Перезвоните мне
-					</button>
+					<Form.Control className='modal-button' type='submit' />
 				</Form>
 			</div>
 		</Modal>
