@@ -10,7 +10,7 @@ import '../../styles/createService.css';
 import { Context } from '../../index';
 import { fetchOneUser } from '../../http/userAPI';
 
-const CreateOrder = observer(({ show, onHide }) => {
+const ServiceCreateOrder = observer(({ show, onHide, service }) => {
 	const { user } = useContext(Context);
 
 	if (user.isAuth) {
@@ -18,7 +18,6 @@ const CreateOrder = observer(({ show, onHide }) => {
 			fetchOneUser().then(data => user.setUser(data));
 		}, []);
 	}
-
 
 	const {
 		register,
@@ -28,7 +27,12 @@ const CreateOrder = observer(({ show, onHide }) => {
 	} = useForm({ mode: 'onBlur' });
 
 	const onSubmit = data => {
-		createOrder(data).then(data => onHide());
+		const formData = new FormData();
+		for (const key in data) {
+			formData.append(key, data[key]);
+		}
+		formData.append('serviceId', service.id);
+		createOrder(formData).then(data => onHide());
 		reset();
 	};
 
@@ -42,7 +46,7 @@ const CreateOrder = observer(({ show, onHide }) => {
 				<img className='modal-x' src={close} alt='Закрыть' onClick={onHide} />
 			</div>
 			<div className='modal-body'>
-				<div className='modal-subtitle'>Заполните форму для получения консультации</div>
+				<div className='modal-service'>Выбрана услуга: {service.name}</div>
 				<Form onSubmit={handleSubmit(onSubmit)}>
 					<Form.Control
 						{...register('name', {
@@ -100,4 +104,4 @@ const CreateOrder = observer(({ show, onHide }) => {
 	);
 });
 
-export default CreateOrder;
+export default ServiceCreateOrder;

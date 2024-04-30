@@ -114,3 +114,11 @@
 
 	padding: 5px 35px 5px 15px;
 }
+
+.modal-service {
+	margin-left: 5px;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 160%;
+	color: #7e868e;
+}

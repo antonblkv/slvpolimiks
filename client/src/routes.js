@@ -2,8 +2,7 @@ import Admin from './pages/Admin';
 import Auth from './pages/Auth';
 import Main from './pages/Main';
 import Catalog from './pages/Catalog';
-import ServicePage from './pages/ServicePage';
-import { ADMIN_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE, SERVICE_ROUTE, CATALOG_ROUTE, PORTFOLIO_ROUTE, LK_ROUTE, ABOUT_ROUTE } from './utils/consts';
+import { ADMIN_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE, CATALOG_ROUTE, PORTFOLIO_ROUTE, LK_ROUTE, ABOUT_ROUTE } from './utils/consts';
 import Portfolio from './pages/Portfolio';
 import PersonalAccount from './pages/PersonalAccount';
 import About from './pages/About';
@@ -38,10 +37,6 @@ export const publicRoutes = [
 	{
 		path: REGISTRATION_ROUTE,
 		Component: Auth,
-	},
-	{
-		path: SERVICE_ROUTE + '/:id',
-		Component: ServicePage,
 	},
 	{
 		path: PORTFOLIO_ROUTE,

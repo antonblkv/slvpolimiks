@@ -5,7 +5,7 @@ const { where } = require('sequelize');
 class OrderController {
 	async create(req, res, next) {
 		try {
-			let { name, phone, comment } = req.body;
+			let { name, phone, comment, serviceId } = req.body;
 
 			let user = await User.findOne({ where: { phone } });
 
@@ -18,6 +18,7 @@ class OrderController {
 				const order = await Order.create({
 					userId,
 					comment,
+					serviceId
 				});
 			
 			return res.json(order);

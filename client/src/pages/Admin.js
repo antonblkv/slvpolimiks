@@ -9,13 +9,12 @@ import TableOrders from '../components/TableOrders';
 import { fetchOrders } from '../http/orderApi';
 import { useForm } from 'react-hook-form';
 import InputMask from 'react-input-mask';
+import { observer } from 'mobx-react-lite';
 
-const Admin = () => {
+const Admin = observer(() => {
 	const { user } = useContext(Context);
 	const { order } = useContext(Context);
 	const currentUser = user.user;
-	const [phone, setPhone] = useState('');
-	const [password, setPassword] = useState('');
 
 	useEffect(() => {
 		fetchOneUser().then(data => user.setUser(data));
@@ -29,6 +28,7 @@ const Admin = () => {
 		localStorage.removeItem('token');
 		user.setUser({});
 		user.setIsAuth(false);
+		user.setIsAdmin(false);
 	};
 
 	const {
@@ -109,6 +109,6 @@ const Admin = () => {
 			<CreateType show={typeVisible} onHide={() => setTypeVisible(false)} />
 		</main>
 	);
-};
+});
 
 export default Admin;
