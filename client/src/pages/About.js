@@ -123,7 +123,7 @@ const About = observer(() => {
 									</div>
 									<div className='form-error'>{errors?.check && <p>{errors?.check?.message}</p>}</div>
 
-									<Form.Control className='modal-button-about' type='submit' value={'Отправить заявку'} />
+									<Form.Control className='modal-button-about' type='submit' value={'Заказать звонок'} />
 								</Form>
 							</div>
 						</div>

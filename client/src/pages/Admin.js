@@ -7,6 +7,8 @@ import { Context } from '../index';
 import { fetchOneUser, updateUser } from '../http/userAPI';
 import TableOrders from '../components/TableOrders';
 import { fetchOrders } from '../http/orderApi';
+import { useForm } from 'react-hook-form';
+import InputMask from 'react-input-mask';
 
 const Admin = () => {
 	const { user } = useContext(Context);
@@ -29,12 +31,18 @@ const Admin = () => {
 		user.setIsAuth(false);
 	};
 
-	const update = () => {
-		const formData = new FormData();
-		formData.append('phone', phone);
-		formData.append('password', password);
-		updateUser(formData);
+	const {
+		register,
+		formState: { errors },
+		handleSubmit,
+		reset,
+	} = useForm({ mode: 'onBlur' });
+
+	const onSubmit = data => {
+		updateUser(data).then();
+		reset();
 	};
+
 	const [typeVisible, setTypeVisible] = useState(false);
 	const [serviceVisible, setServiceVisible] = useState(false);
 
@@ -57,24 +65,33 @@ const Admin = () => {
 						<button className='delete-button'>Удалить категорию</button>
 					</div>
 					<div className='admin-data'>
-						<Form className='form-admin'>
+						<Form className='form-admin' onSubmit={handleSubmit(onSubmit)}>
 							<Form.Control
 								className='form-lk'
 								placeholder={currentUser.phone}
-								value={phone}
-								onChange={e => setPhone(e.target.value)}
+								as={InputMask}
+								mask='+7 (***) ***-**-**'
+								{...register('phone', {
+									pattern: {
+										value: /^\+\d{1,3}\s*\(\d{1,3}\)\s*\d{3}-\d{2}-\d{2}$/,
+										message: 'Необходимо ввести номер полностью',
+									},
+								})}
 							/>
+							<div className='form-error'>{errors?.phone && <p>{errors?.phone?.message}</p>}</div>
 
 							<Form.Control
 								className='form-lk'
-								placeholder={currentUser.password}
-								value={password}
-								onChange={e => setPassword(e.target.value)}
+								placeholder='Пароль'
+								type='password'
+								{...register('password', {
+									maxLength: { value: 20, message: 'Максимум 20 символов' },
+									minLength: { value: 6, message: 'Минимум 6 символов' },
+								})}
 							/>
+							<div className='form-error'>{errors?.password && <p>{errors?.password?.message}</p>}</div>
 
-							<button className='button-save' onClick={update}>
-								Сохранить
-							</button>
+							<Form.Control className='button-save' type='submit' value={'Сохранить'} />
 
 							<button className='button-exit' onClick={() => logOut()}>
 								Выйти
