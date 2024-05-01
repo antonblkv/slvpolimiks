@@ -93,7 +93,6 @@
 
 .row-orders {
 	background-color: #ddfdff;
-	height: 40px;
 	border: none;
 	text-align: center;
 	border-radius: 8px;
@@ -116,6 +115,19 @@
 .comment-order {
 	text-align: center;
 	width: 660px;
+}
+
+.comment {
+	width: 650px;
+	height: 30px;
+	white-space: nowrap;
+	overflow: hidden; 
+	text-overflow: ellipsis;
+}
+
+.comment:hover {
+	white-space: normal;
+	height: 100%;
 }
 
 .th-number,

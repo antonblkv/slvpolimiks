@@ -9,7 +9,9 @@ const OrderItem = ({ order }) => {
 			<td className='number-order'>{order.id}</td>
 			<td className='name-order'></td>
 			<td className='status-order'>{order.status}</td>
-			<td className='comment-order'>{order.comment}</td>
+			<td className='comment-order'>
+				<div className='comment'>{order.comment}</div>
+			</td>
 		</tr>
 	);
 };
