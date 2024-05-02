@@ -77,30 +77,35 @@
 }
 
 .table-orders {
-	margin-top: 15px;
-	display: flex;
-	flex-direction: column;
+	width: 100%;
+	border-collapse: separate;
+  border-spacing: 0 15px;
 	border-radius: 8px;
+	table-layout: fixed;
 }
 
-.head-orders {
-	height: 40px;
-	border: none;
-	text-align: center;
-	border-radius: 8px;
-	margin-bottom: 10px;
+td {
+	border-right: 1px solid rgba(98, 170, 200, 0.8);
 }
 
 .row-orders {
 	background-color: #ddfdff;
 	border: none;
 	text-align: center;
-	border-radius: 8px;
 	margin-bottom: 10px;
 }
 
 .row-orders > th {
 	background-color: rgba(98, 170, 200, 0.8);
+}
+
+.row-orders > td:first-child {
+	border-radius: 8px 0 0 8px;
+}
+
+.row-orders > td:last-child {
+	border-radius: 0 8px 8px 0;
+	border: none;
 }
 
 .row-orders > th:first-child {
@@ -111,14 +116,7 @@
 	border-radius: 0 8px 8px 0;
 }
 
-.th-comment,
-.comment-order {
-	text-align: center;
-	width: 660px;
-}
-
 .comment {
-	width: 650px;
 	height: 30px;
 	white-space: nowrap;
 	overflow: hidden; 
@@ -130,21 +128,35 @@
 	height: 100%;
 }
 
-.th-number,
-.number-order {
-	border: none;
-	width: 100px;
-}
-
-.th-name,
-.th-status,
-.name-order,
-.status-order {
-	border: none;
-	width: 330px;
-}
-
 th,
 td {
 	padding: 5px;
+}
+
+th {
+	text-align: center;
+}
+
+thead th:nth-child(1) {
+  width: 5%;
+}
+
+thead th:nth-child(2) {
+  width: 15%;
+}
+
+thead th:nth-child(3) {
+  width: 15%;
+}
+
+thead th:nth-child(4) {
+  width: 20%;
+}
+
+thead th:nth-child(5) {
+  width: 15%;
+}
+
+thead th:nth-child(6) {
+  width: 30%;
 }
