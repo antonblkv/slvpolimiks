@@ -25,6 +25,8 @@ export const fetchServices = async typeId => {
 };
 
 export const fetchOneService = async id => {
-	const { data } = await $host.get('api/service/' + id);
-	return data;
+	if (id) {
+		const { data } = await $host.get('api/service/' + id);
+		return data;
+	}
 };
