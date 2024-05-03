@@ -23,16 +23,14 @@ const OrderItem = ({ order }) => {
 				<>
 					<td className='name-user'>{userOrder.name}</td>
 					<td className='phone-user'>{userOrder.phone}</td>
-					<td className='email-user'>{userOrder.email}</td>
+					<td className='email-user'>{userOrder.email ? userOrder.email : '-'}</td>
 				</>
 			) : (
 				''
 			)}
 			<td className='name-order'>{service ? service.name : 'Первичный звонок'}</td>
 			<td className='status-order'>{order.status}</td>
-			<td className='comment-order'>
-				{order.comment}
-			</td>
+			<td className='comment-order'>{order.comment ? order.comment : '-'}</td>
 		</tr>
 	);
 };

@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { SERVICE_ROUTE } from '../utils/consts';
+import React, { useState, useContext } from 'react';
 import ServiceCreateOrder from '../components/modals/ServiceCreateOrder';
+import { Context } from '../index';
+import { deleteService } from '../http/serviceAPI';
 
 const ServiceItem = ({ service }) => {
-	const history = useNavigate();
+	const { user } = useContext(Context);
 	const [applicationVisible, setApplicationVisible] = useState(false);
+
+	const deleteThisService = (id) => {
+		deleteService(id);
+		window.location.reload();
+	}
 	
 	return (
 		<div class='item'>
@@ -15,7 +20,20 @@ const ServiceItem = ({ service }) => {
 				<div class='description-item'>{service.description}</div>
 				<div class='footer-item'>
 					<div class='price-item'>Цена: от {service.price} руб.</div>
-					<button onClick={() => setApplicationVisible(true)}>Отправить заявку</button>
+					{user.isAdmin ? (
+						<>
+							<div className='catalog-admin-buttons'>
+								<button className='admin-button-edit' onClick={() => setApplicationVisible(true)}>
+									Редактировать
+								</button>
+								<button className='admin-button-delete' onClick={() => deleteThisService(service.id)}>
+									Удалить
+								</button>
+							</div>
+						</>
+					) : (
+						<button onClick={() => setApplicationVisible(true)}>Отправить заявку</button>
+					)}
 				</div>
 			</div>
 

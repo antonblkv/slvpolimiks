@@ -1,11 +1,20 @@
+import About from './pages/About';
 import Admin from './pages/Admin';
 import Auth from './pages/Auth';
-import Main from './pages/Main';
 import Catalog from './pages/Catalog';
-import { ADMIN_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE, CATALOG_ROUTE, PORTFOLIO_ROUTE, LK_ROUTE, ABOUT_ROUTE } from './utils/consts';
-import Portfolio from './pages/Portfolio';
+import Main from './pages/Main';
 import PersonalAccount from './pages/PersonalAccount';
-import About from './pages/About';
+import Portfolio from './pages/Portfolio';
+import {
+	ABOUT_ROUTE,
+	ADMIN_ROUTE,
+	CATALOG_ROUTE,
+	LK_ROUTE,
+	LOGIN_ROUTE,
+	MAIN_ROUTE,
+	PORTFOLIO_ROUTE,
+	REGISTRATION_ROUTE,
+} from './utils/consts';
 
 export const authRoutes = [
 	{

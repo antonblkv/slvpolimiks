@@ -1,13 +1,13 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import TableOrders from '../components/TableOrders';
-import { fetchOrders } from '../http/orderApi';
-import { updateUser, fetchUser } from '../http/userAPI';
-import { Context } from '../index';
-import '../styles/lk.css';
 import { useForm } from 'react-hook-form';
 import InputMask from 'react-input-mask';
+import TableOrders from '../components/TableOrders';
+import { fetchOrders } from '../http/orderApi';
+import { fetchUser, updateUser } from '../http/userAPI';
+import { Context } from '../index';
+import '../styles/lk.css';
 
 const PersonalAccount = observer(() => {
 	const { user } = useContext(Context);
@@ -40,7 +40,6 @@ const PersonalAccount = observer(() => {
 		reset();
 		window.location.reload();
 	};
-
 
 	return (
 		<main className='lk-main'>
