@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { fetchOneService } from '../http/serviceAPI';
-import { fetchOneUser } from '../http/userAPI';
+import { fetchUser } from '../http/userAPI';
 import { Context } from '../index';
 
 const OrderItem = ({ order }) => {
 	const { user } = useContext(Context);
-
-
-	const [currentUser, setCurrentUser] = useState({});
+	const [userOrder, setUser] = useState({});
 	const [service, setService] = useState({});
 
 	useEffect(() => {
@@ -15,7 +13,7 @@ const OrderItem = ({ order }) => {
 	}, []);
 
 	useEffect(() => {
-		fetchOneUser(order.userId).then(data => setCurrentUser(data));
+		fetchUser(order.userId).then(data => setUser(data));
 	}, []);
 
 	return (
@@ -23,8 +21,9 @@ const OrderItem = ({ order }) => {
 			<td className='number-order'>{order.id}</td>
 			{user.isAdmin ? (
 				<>
-					<td className='name-user'>{currentUser.name}</td>
-					<td className='phone-user'>{currentUser.phone}</td>
+					<td className='name-user'>{userOrder.name}</td>
+					<td className='phone-user'>{userOrder.phone}</td>
+					<td className='email-user'>{userOrder.email}</td>
 				</>
 			) : (
 				''
@@ -32,7 +31,7 @@ const OrderItem = ({ order }) => {
 			<td className='name-order'>{service ? service.name : 'Первичный звонок'}</td>
 			<td className='status-order'>{order.status}</td>
 			<td className='comment-order'>
-				<div className='comment'>{order.comment}</div>
+				{order.comment}
 			</td>
 		</tr>
 	);

@@ -29,7 +29,6 @@ class UserController {
 			return next(ApiError.badRequest('Пользователь с таким номером телефона уже существует'));
 		}
 
-
 		user = await User.create({ phone, role, password: hashPassword });
 		const token = generateJwt(user.id, user.phone, user.role);
 		return res.json({ token });
@@ -83,6 +82,14 @@ class UserController {
 		const token = req.headers.authorization.split(' ')[1];
 		const decoded = jwt.verify(token, process.env.SECRET_KEY);
 		const id = decoded.id;
+		const user = await User.findOne({
+			where: { id },
+		});
+		return res.json(user);
+	}
+
+	async getUser(req, res) {
+		const { id } = req.params;
 		const user = await User.findOne({
 			where: { id },
 		});

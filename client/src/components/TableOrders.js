@@ -16,6 +16,7 @@ const TableOrders = observer(() => {
 						<>
 							<th className='th-status'>Имя</th>
 							<th className='th-status'>Телефон</th>
+							<th className='th-status'>Email</th>
 						</>
 					) : (
 						''

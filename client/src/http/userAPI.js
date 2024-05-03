@@ -18,6 +18,13 @@ export const fetchOneUser = async () => {
 	return data;
 };
 
+export const fetchUser = async id => {
+	if (id) {
+		const { data } = await $authHost.get('api/user/' + id);
+		return data;
+	}
+};
+
 export const updateUser = async user => {
 	const { data } = await $authHost.put('api/user/lk', user);
 	return data;

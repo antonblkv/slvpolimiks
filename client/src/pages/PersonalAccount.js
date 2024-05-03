@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import TableOrders from '../components/TableOrders';
 import { fetchOrders } from '../http/orderApi';
-import { fetchOneUser, updateUser } from '../http/userAPI';
+import { updateUser, fetchUser } from '../http/userAPI';
 import { Context } from '../index';
 import '../styles/lk.css';
 import { useForm } from 'react-hook-form';
@@ -12,10 +12,10 @@ import InputMask from 'react-input-mask';
 const PersonalAccount = observer(() => {
 	const { user } = useContext(Context);
 	const { order } = useContext(Context);
-	const currentUser = user.user;
+	const [currentUser, setCurrentUser] = useState({});
 
 	useEffect(() => {
-		fetchOneUser().then(data => user.setUser(data));
+		fetchUser(user.user.id).then(data => setCurrentUser(data));
 	}, []);
 
 	useEffect(() => {
@@ -38,6 +38,7 @@ const PersonalAccount = observer(() => {
 	const onSubmit = data => {
 		updateUser(data).then();
 		reset();
+		window.location.reload();
 	};
 
 
