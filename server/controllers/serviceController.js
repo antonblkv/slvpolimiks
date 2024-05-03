@@ -48,7 +48,7 @@ class ServiceController {
 		return res.json(service);
 	}
 
-	async deleteOne(req, res, next) {
+	async delete(req, res, next) {
 		try {
 			const { id } = req.params;
 			const service = await Service.findOne({

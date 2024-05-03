@@ -1,15 +1,16 @@
+import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import '../styles/admin.css';
-import CreateService from '../components/modals/CreateService';
-import CreateType from '../components/modals/CreateType';
-import { Context } from '../index';
-import { fetchOneUser, updateUser } from '../http/userAPI';
-import TableOrders from '../components/TableOrders';
-import { fetchOrders } from '../http/orderApi';
 import { useForm } from 'react-hook-form';
 import InputMask from 'react-input-mask';
-import { observer } from 'mobx-react-lite';
+import TableOrders from '../components/TableOrders';
+import CreateService from '../components/modals/CreateService';
+import CreateType from '../components/modals/CreateType';
+import DeleteType from '../components/modals/DeleteType';
+import { fetchOrders } from '../http/orderApi';
+import { fetchOneUser, updateUser } from '../http/userAPI';
+import { Context } from '../index';
+import '../styles/admin.css';
 
 const Admin = observer(() => {
 	const { user } = useContext(Context);
@@ -21,7 +22,7 @@ const Admin = observer(() => {
 	}, []);
 
 	useEffect(() => {
-			fetchOrders(null).then(data => order.setOrders(data));
+		fetchOrders(null).then(data => order.setOrders(data));
 	}, []);
 
 	const logOut = () => {
@@ -44,6 +45,7 @@ const Admin = observer(() => {
 	};
 
 	const [typeVisible, setTypeVisible] = useState(false);
+	const [deleteTypeVisible, setDeleteTypeVisible] = useState(false);
 	const [serviceVisible, setServiceVisible] = useState(false);
 
 	return (
@@ -62,7 +64,9 @@ const Admin = observer(() => {
 						<button className='create-button' onClick={() => setTypeVisible(true)}>
 							Добавить категорию
 						</button>
-						<button className='delete-button'>Удалить категорию</button>
+						<button className='delete-button' onClick={() => setDeleteTypeVisible(true)}>
+							Удалить категорию
+						</button>
 					</div>
 					<div className='admin-data'>
 						<Form className='form-admin' onSubmit={handleSubmit(onSubmit)}>
@@ -107,6 +111,7 @@ const Admin = observer(() => {
 			</div>
 			<CreateService show={serviceVisible} onHide={() => setServiceVisible(false)} />
 			<CreateType show={typeVisible} onHide={() => setTypeVisible(false)} />
+			<DeleteType show={deleteTypeVisible} onHide={() => setDeleteTypeVisible(false)} />
 		</main>
 	);
 });

@@ -33,7 +33,14 @@ export const fetchOneService = async id => {
 
 export const deleteService = async id => {
 	if (id) {
-		const { data } = await $host.delete('api/service/' + id);
+		const { data } = await $authHost.delete('api/service/' + id);
+		return data;
+	}
+};
+
+export const deleteType = async id => {
+	if (id) {
+		const { data } = await $authHost.delete('api/type/' + id);
 		return data;
 	}
 };

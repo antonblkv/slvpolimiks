@@ -12,6 +12,26 @@ class TypeController {
 		const types = await Type.findAll();
 		return res.json(types);
 	}
+
+	async delete(req, res, next) {
+		try {
+			const { id } = req.params;
+			const type = await Type.findOne({
+				where: { id },
+			});
+			if (type) {
+				await Type.destroy({
+					where: { id },
+				});
+				return res.status(200).json({ message: 'Deleted successfully' });
+			}
+			throw new Error('There is no device with this ID');
+		} catch (e) {
+			next(ApiError.badRequest(e.message));
+		}
+	}
 }
+
+
 
 module.exports = new TypeController();
