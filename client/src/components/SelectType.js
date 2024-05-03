@@ -6,29 +6,24 @@ import '../styles/selectType.css';
 
 const SelectType = observer(() => {
 	const { service } = useContext(Context);
-	const [valueType, setType] = useState('');
+	const [valueType, setType] = useState();
 
 	useEffect(() => {
 		fetchTypes().then(data => service.setTypes(data));
-		fetchServices(null).then(data => service.setServices(data));
-	}, []);
-
-	useEffect(() => {
-		fetchServices(service.selectedType.id).then(data => {
+		fetchServices(valueType).then(data => {
 			service.setServices(data);
 		});
-	}, [service.selectedType.id]);
-
-	const handleChange = event => {
-		setType(event.target.value);
-		if (event.target.value - 1 < 0) service.setSelectedType(service.types);
-		if (event.target.value - 1 >= 0) service.setSelectedType(service.types[event.target.value - 1]);
-	};
+	}, [valueType]);
 
 	return (
 		<div className='select'>
 			<div className='select-wrapper'>
-				<select name='select-types' className='select-types' value={valueType} onChange={handleChange}>
+				<select
+					name='select-types'
+					className='select-types'
+					value={valueType}
+					onChange={event => setType(event.target.value)}
+				>
 					<option className='option-type' value={0}>
 						Все категории
 					</option>

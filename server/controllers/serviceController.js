@@ -29,7 +29,7 @@ class ServiceController {
 	async getAll(req, res) {
 		let { typeId } = req.query;
 		let services;
-		if (!typeId) {
+		if (!typeId || typeId === '0') {
 			services = await Service.findAll();
 		} else {
 			services = await Service.findAll({

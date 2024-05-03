@@ -5,6 +5,7 @@ import SelectType from '../components/SelectType';
 import '../styles/service.css';
 
 const Catalog = observer(() => {
+
 	return (
 		<main className='catalog-main'>
 			<div className='wrapper-service'>
@@ -13,7 +14,7 @@ const Catalog = observer(() => {
 						<h1 class='title'>Каталог</h1>
 						<SelectType></SelectType>
 					</div>
-						<ServiceList></ServiceList>
+					<ServiceList></ServiceList>
 				</div>
 			</div>
 		</main>
