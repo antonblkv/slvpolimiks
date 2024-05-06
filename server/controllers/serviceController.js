@@ -7,13 +7,12 @@ const ApiError = require('../error/ApiError');
 class ServiceController {
 	async create(req, res, next) {
 		try {
-			let { name, subtitle, description, price, typeId } = req.body;
+			let { name, description, price, typeId } = req.body;
 			const { img } = req.files;
 			let fileName = uuid.v4() + '.jpg';
 			img.mv(path.resolve(__dirname, '..', 'static', fileName));
 			const service = await Service.create({
 				name,
-				subtitle,
 				description,
 				price,
 				typeId,
@@ -52,15 +51,14 @@ class ServiceController {
 		try {
 			const { id } = req.params;
 			const service = await Service.findOne({
-				where: { id }
+				where: { id },
 			});
-			console.log(path.resolve(__dirname, '..', 'static', service.dataValues.img));
 			if (service) {
 				await fs.unlink(path.resolve(__dirname, '..', 'static', service.dataValues.img), error => {
 					if (error) throw error;
 				});
 				await Service.destroy({
-					where: { id }
+					where: { id },
 				});
 				return res.status(200).json({ message: 'Deleted successfully' });
 			}
@@ -68,6 +66,42 @@ class ServiceController {
 		} catch (e) {
 			next(ApiError.badRequest(e.message));
 		}
+	}
+
+	async update(req, res, next) {
+		let { id, name, description, price, typeId } = req.body;
+
+		const service = await Service.findOne({
+			where: { id },
+		});
+
+		if (req.files) {
+			await fs.unlink(path.resolve(__dirname, '..', 'static', service.dataValues.img), error => {
+				if (error) throw error;
+			});
+			const { img } = req.files;
+			let fileName = uuid.v4() + '.jpg';
+			img.mv(path.resolve(__dirname, '..', 'static', fileName));
+			await service.update({ img: fileName });
+		}
+
+		if (name) {
+			await service.update({ name });
+		}
+
+		if (description) {
+			await service.update({ description });
+		}
+
+		if (price) {
+			await service.update({ price });
+		}
+
+		if (typeId && typeId != 0) {
+			await service.update({ typeId });
+		}
+
+		return res.json(service);
 	}
 }
 

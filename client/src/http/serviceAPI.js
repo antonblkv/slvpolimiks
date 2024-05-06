@@ -15,6 +15,11 @@ export const createService = async service => {
 	return data;
 };
 
+export const updateService = async service => {
+	const { data } = await $authHost.put('api/service', service);
+	return data;
+};
+
 export const fetchServices = async typeId => {
 	const { data } = await $host.get('api/service', {
 		params: {
