@@ -89,6 +89,7 @@ td {
 }
 
 .row-orders {
+	cursor: pointer;
 	background-color: #ddfdff;
 	border: none;
 	text-align: center;

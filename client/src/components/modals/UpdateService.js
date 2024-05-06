@@ -7,11 +7,9 @@ import { fetchTypes, updateService } from '../../http/serviceAPI';
 import close from '../../images/close.svg';
 import { Context } from '../../index';
 import '../../styles/createService.css';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { CATALOG_ROUTE, MAIN_ROUTE } from '../../utils/consts';
+
 
 const UpdateService = observer(({ show, onHide, currentService }) => {
-	const history = useNavigate();
 	const { service } = useContext(Context);
 
 	useEffect(() => {

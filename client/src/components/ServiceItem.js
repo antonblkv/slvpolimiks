@@ -9,11 +9,6 @@ const ServiceItem = ({ service }) => {
 	const [applicationVisible, setApplicationVisible] = useState(false);
 	const [updateVisible, setUpdateVisible] = useState(false);
 
-	const deleteThisService = (id) => {
-		deleteService(id);
-		window.location.reload();
-	}
-	
 	return (
 		<div class='item'>
 			<img src={process.env.REACT_APP_API_URL + service.img} alt='' />
@@ -28,7 +23,10 @@ const ServiceItem = ({ service }) => {
 								<button className='admin-button-edit' onClick={() => setUpdateVisible(true)}>
 									Редактировать
 								</button>
-								<button className='admin-button-delete' onClick={() => deleteThisService(service.id)}>
+								<button
+									className='admin-button-delete'
+									onClick={() => deleteService(service.id).then(() => window.location.reload())}
+								>
 									Удалить
 								</button>
 							</div>
@@ -44,7 +42,11 @@ const ServiceItem = ({ service }) => {
 				show={applicationVisible}
 				onHide={() => setApplicationVisible(false)}
 			></ServiceCreateOrder>
-			<UpdateService currentService={service} show={updateVisible} onHide={() => setUpdateVisible(false)}></UpdateService>
+			<UpdateService
+				currentService={service}
+				show={updateVisible}
+				onHide={() => setUpdateVisible(false)}
+			></UpdateService>
 		</div>
 	);
 };

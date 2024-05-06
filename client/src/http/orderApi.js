@@ -14,3 +14,15 @@ export const fetchOrders = async userId => {
 
 	return data;
 };
+
+export const updateOrder = async order => {
+	const { data } = await $authHost.put('api/order', order);
+	return data;
+};
+
+export const deleteOrder = async id => {
+	if (id) {
+		const { data } = await $authHost.delete('api/order/' + id);
+		return data;
+	}
+};
