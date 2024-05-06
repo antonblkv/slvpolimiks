@@ -19,7 +19,7 @@
 .form {
 	font-family: 'Montserrat';
 	font-weight: 400;
-	font-size: 15px;
+	font-size: 18px;
 	line-height: 160%;
 	color: #7e868e;
 	border-radius: 8px;
@@ -59,8 +59,8 @@
 }
 
 .modal-subtitle {
-	font-weight: 400;
-	font-size: 16px;
+	font-weight: 600;
+	font-size: 17px;
 	line-height: 150%;
 	color: #2e363e;
 	text-align: center;
