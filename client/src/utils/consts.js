@@ -7,3 +7,4 @@ export const CATALOG_ROUTE = '/catalog';
 export const PORTFOLIO_ROUTE = '/portfolio';
 export const LK_ROUTE = '/lk';
 export const ABOUT_ROUTE = '/about';
+export const POLICY_ROUTE = '/policy';

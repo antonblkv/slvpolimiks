@@ -9,8 +9,11 @@ import close from '../../images/close.svg';
 import '../../styles/createService.css';
 import { Context } from '../../index';
 import { fetchOneUser } from '../../http/userAPI';
+import { POLICY_ROUTE } from '../../utils/consts';
+import { useNavigate } from 'react-router-dom';
 
 const CreateOrder = observer(({ show, onHide }) => {
+	const history = useNavigate();
 	const { user } = useContext(Context);
 
 	if (user.isAuth) {
@@ -89,7 +92,9 @@ const CreateOrder = observer(({ show, onHide }) => {
 							id='checkbox'
 							className='modal-checkbox'
 						/>
-						<label className='modal-checkbox-label'>Даю согласие на обработку персональных данных</label>
+						<label className='modal-checkbox-label' onClick={() => history(POLICY_ROUTE)}>
+							Даю согласие на обработку персональных данных
+						</label>
 					</div>
 					<div className='form-error'>{errors?.check && <p>{errors?.check?.message}</p>}</div>
 

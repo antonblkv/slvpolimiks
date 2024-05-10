@@ -1,9 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../images/logo.svg';
 import { Context } from '../index';
-import { CATALOG_ROUTE, LOGIN_ROUTE, MAIN_ROUTE } from '../utils/consts';
+import { ABOUT_ROUTE, CATALOG_ROUTE, LOGIN_ROUTE, LK_ROUTE, POLICY_ROUTE, ADMIN_ROUTE } from '../utils/consts';
 import '../styles/footer.css';
 
 const Footer = observer(() => {
@@ -21,21 +20,41 @@ const Footer = observer(() => {
 			<div className='wrapper'>
 				<div className='container-footer'>
 					<section className='footer-address'>
-						<p className='bold'>Республика Башкортостан</p>
-						<p>г. Салават, ул. Южная д. 11</p>
-						<p>+7 (991) 876-14-30</p>
-						<p>пн-пт с 7:00 до 18:00</p>
+						<a className='bold' onClick={() => history(ABOUT_ROUTE)}>
+							Республика Башкортостан
+						</a>
+						<a onClick={() => history(ABOUT_ROUTE)}>г. Салават, ул. Южная д. 11</a>
+						<a onClick={() => history(ABOUT_ROUTE)}>+7 (991) 876-14-30</a>
+						<a onClick={() => history(ABOUT_ROUTE)}>пн-пт с 7:00 до 18:00</a>
 					</section>
 					<section className='footer-catalog'>
-						<p className='bold'>Личный кабинет</p>
-						<p>Наши услуги</p>
-						<p>Политика обработки персональных данных</p>
+						<p className='bold'>
+							{user.isAuth ? (
+								user.isAdmin ? (
+									<a onClick={() => history(ADMIN_ROUTE)}>
+										Админ-панель
+									</a>
+								) : (
+									<a onClick={() => history(LK_ROUTE)}>
+										Личный кабинет
+									</a>
+								)
+							) : (
+								<a onClick={() => history(LOGIN_ROUTE)}>
+									Войти
+								</a>
+							)}
+						</p>
+						<a onClick={() => history(CATALOG_ROUTE)}>Наши услуги</a>
+						<a onClick={() => history(POLICY_ROUTE)}>Политика обработки персональных данных</a>
 					</section>
 					<section className='footer-info'>
-						<p className='bold'>ООО "Салаватполимикс"</p>
-						<p>ОРГН: 1036164030810</p>
-						<p>© 2003-2024</p>
-						<p>slvpolimiks@mail.ru</p>
+						<a className='bold' onClick={() => history(ABOUT_ROUTE)}>
+							ООО "Салаватполимикс"
+						</a>
+						<a onClick={() => history(ABOUT_ROUTE)}>ОРГН: 1036164030810</a>
+						<a onClick={() => history(ABOUT_ROUTE)}>© 2003-2024</a>
+						<a onClick={() => history(ABOUT_ROUTE)}>slvpolimiks@mail.ru</a>
 					</section>
 				</div>
 			</div>

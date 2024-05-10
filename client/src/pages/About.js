@@ -5,8 +5,12 @@ import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import InputMask from 'react-input-mask';
 import { createOrder } from '../http/orderApi';
+import { useNavigate } from 'react-router-dom';
+import { POLICY_ROUTE } from '../utils/consts';
 
 const About = observer(() => {
+const history = useNavigate();
+
 	const {
 		register,
 		formState: { errors },
@@ -25,15 +29,15 @@ const About = observer(() => {
 				<div className='about-body'>
 					<div className='about-title'>
 						<h1 class='title'>О компании</h1>
-						<h2 className='subtitle'>Группа Аквилон 20 лет на рынке недвижимости</h2>
 					</div>
 
 					<div className='about-container'>
 						<div className='about-description'>
-							Группа Аквилон - одна из ведущих девелоперских компаний, более 20 лет предоставляющая полный спектр услуг
-							на рынке недвижимости в Санкт-Петербурге, Ленинградской области, Москве, Архангельске, Северодвинске.
-							Группа Аквилон признана системообразующим предприятием России. Группа Аквилон - одна из ведущих
-							девелоперских компаний, более 20 лет предоставляющая полный 
+							Свою деятельность компания «Салаватполимикс» начала в 2007 году со строительно-монтажных работ. Постепенно
+							расширяя области своей деятельности, добавляя новые виды услуг: от модернизации и поставки оборудования до
+							работ по строительству, реконструкции, капитальному ремонту и сносу зданий и сооружений. На сегодняшний
+							день компания успешно выполняет проекты в промышленной, коммерческой, социальной и гражданско-бытовой
+							сферах.
 						</div>
 						<div className='about-columns'>
 							<div className='about-info'>
@@ -69,7 +73,8 @@ const About = observer(() => {
 								<div className='info-row'>
 									<p className='text'>
 										<b className='sb'>Услуги: </b>
-										инженерно-коммуникационные работы, ландшафтные работы, обустройство фундамента, работа с металлом и др.
+										инженерно-коммуникационные работы, ландшафтные работы, обустройство фундамента, работа с металлом и
+										др.
 									</p>
 								</div>
 							</div>
@@ -119,7 +124,9 @@ const About = observer(() => {
 											id='checkbox'
 											className='modal-checkbox'
 										/>
-										<label className='modal-checkbox-label'>Даю согласие на обработку персональных данных</label>
+										<label className='modal-checkbox-label' onClick={() => history(POLICY_ROUTE)}>
+											Даю согласие на обработку персональных данных
+										</label>
 									</div>
 									<div className='form-error'>{errors?.check && <p>{errors?.check?.message}</p>}</div>
 

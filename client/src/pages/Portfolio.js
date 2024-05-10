@@ -1,6 +1,9 @@
 import React from 'react';
 import '../styles/portfolio.css';
-import portfolio_img from '../images/portfolio.png'
+import portfolio1 from '../images/portfolio1.jpg'
+import portfolio2 from '../images/portfolio2.jpg';
+import portfolio3 from '../images/portfolio3.jpg';
+import portfolio4 from '../images/portfolio4.jpg';
 
 const Portfolio = () => {
 	return (
@@ -13,7 +16,7 @@ const Portfolio = () => {
 
 					<div className='portfolio-container'>
 						<div className='portfolio-item'>
-							<img className='portfolio-img' src={portfolio_img} alt='' />
+							<img className='portfolio-img' src={portfolio1} alt='' />
 							<div className='portfolio-description'>
 								Замена турбокомпрессора М-1 в границах проекта «Реконструкция этиленовой установки ЭП-300» г. Кстово в
 								период остановочного ремонта.
@@ -22,30 +25,26 @@ const Portfolio = () => {
 						</div>
 
 						<div className='portfolio-item'>
-							<img className='portfolio-img' src={portfolio_img} alt='' />
-							<div className='portfolio-description'>
-								Замена турбокомпрессора М-1 в границах проекта «Реконструкция этиленовой установки ЭП-300» г. Кстово в
-								период остановочного ремонта.
-							</div>
-							<div className='portfolio-name'>ООО «Сибур-Кстово»</div>
+							<img className='portfolio-img' src={portfolio2} alt='' />
+							<div className='portfolio-description'>Замена физического оборудования на объектах АО «СНПЗ».</div>
+							<div className='portfolio-name'>АО «Сызранский НПЗ»</div>
 						</div>
 
 						<div className='portfolio-item'>
-							<img className='portfolio-img' src={portfolio_img} alt='' />
+							<img className='portfolio-img' src={portfolio3} alt='' />
 							<div className='portfolio-description'>
-								Замена турбокомпрессора М-1 в границах проекта «Реконструкция этиленовой установки ЭП-300» г. Кстово в
-								период остановочного ремонта.
+								Установка дожимной компрессорной станции для подключения к ГТС ОАО «Газпром» в два этапа.
 							</div>
-							<div className='portfolio-name'>ООО «Сибур-Кстово»</div>
+							<div className='portfolio-name'>ООО «ЛУКОЙЛ-Пермнефтегазпереработка»</div>
 						</div>
 
 						<div className='portfolio-item'>
-							<img className='portfolio-img' src={portfolio_img} alt='' />
+							<img className='portfolio-img' src={portfolio4} alt='' />
 							<div className='portfolio-description'>
-								Замена турбокомпрессора М-1 в границах проекта «Реконструкция этиленовой установки ЭП-300» г. Кстово в
-								период остановочного ремонта.
+								Установка производства силикагеля. Реконструкция здания об.612 под производство катализатора
+								порошкового.
 							</div>
-							<div className='portfolio-name'>ООО «Сибур-Кстово»</div>
+							<div className='portfolio-name'>ООО «Салаватский катализаторный завод»</div>
 						</div>
 					</div>
 				</div>

@@ -84,3 +84,15 @@
 	border: none;
 	background: linear-gradient(142deg, rgba(97, 169, 200, 1) 1.39%, rgba(38, 113, 144, 0.41) 100%);
 }
+
+.policy-paragraph-name {
+	margin-bottom: 0;
+	font-weight: 500;
+	font-size: 30px;
+}
+
+.policy-paragraph {
+	font-weight: 400;
+	font-size: 28px;
+	text-align: justify;
+}

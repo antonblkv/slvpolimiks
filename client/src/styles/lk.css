@@ -166,3 +166,7 @@ thead th:nth-child(6) {
 thead th:nth-child(7) {
   width: 18%;
 }
+
+.comment-order {
+	font-size: 17px;
+}

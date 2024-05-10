@@ -4,6 +4,7 @@ import Auth from './pages/Auth';
 import Catalog from './pages/Catalog';
 import Main from './pages/Main';
 import PersonalAccount from './pages/PersonalAccount';
+import Policy from './pages/Policy';
 import Portfolio from './pages/Portfolio';
 import {
 	ABOUT_ROUTE,
@@ -14,6 +15,7 @@ import {
 	MAIN_ROUTE,
 	PORTFOLIO_ROUTE,
 	REGISTRATION_ROUTE,
+	POLICY_ROUTE,
 } from './utils/consts';
 
 export const authRoutes = [
@@ -54,5 +56,9 @@ export const publicRoutes = [
 	{
 		path: ABOUT_ROUTE,
 		Component: About,
+	},
+	{
+		path: POLICY_ROUTE,
+		Component: Policy,
 	},
 ];
