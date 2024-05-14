@@ -29,8 +29,8 @@ const CreateType = ({ show, onHide }) => {
 					<Form.Control
 						{...register('name', {
 							required: 'Поле обязательно к заполнению',
-							maxLength: { value: 20, message: 'Максимум 40 символов' },
-							pattern: { value: /^[а-яА-Я\s]*$/, message: 'Только русские буквы' },
+							maxLength: { value: 40, message: 'Максимум 40 символов' },
+							pattern: { value: /^[а-яА-Я\s-]*$/, message: 'Только русские буквы' },
 						})}
 						placeholder={'Введите название категории'}
 						className='form'

@@ -84,7 +84,7 @@ const PersonalAccount = observer(() => {
 								className='form-lk'
 								placeholder={currentUser.email ? currentUser.email : 'Ваш Email'}
 								{...register('email', {
-									pattern: { value: /^[a-zA-Z@.]*$/, message: 'Только английские буквы' },
+									pattern: { value: /^[\da-zA-Z@.]*$/, message: 'Только английские буквы' },
 								})}
 							/>
 							<div className='form-error'>{errors?.email && <p>{errors?.email?.message}</p>}</div>

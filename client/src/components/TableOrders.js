@@ -27,9 +27,9 @@ const TableOrders = observer(() => {
 					<th className='th-comment'>Комментарий</th>
 				</tr>
 			</thead>
-			{order.orders.map(order => (
-				<OrderItem key={order.id} order={order} />
-			))}
+			{order.orders.slice().sort((order1, order2) => order1.id - order2.id).map(order => (
+					<OrderItem key={order.id} order={order} />
+				))}
 		</table>
 	);
 });

@@ -41,7 +41,7 @@ const Footer = observer(() => {
 								)
 							) : (
 								<a onClick={() => history(LOGIN_ROUTE)}>
-									Войти
+									Авторизация
 								</a>
 							)}
 						</p>

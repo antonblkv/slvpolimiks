@@ -57,8 +57,8 @@ const CreateService = observer(({ show, onHide }) => {
 					<Form.Control
 						{...register('name', {
 							required: 'Поле обязательно к заполнению',
-							maxLength: { value: 30, message: 'Максимум 30 символов' },
-							pattern: { value: /^[а-яА-Я]*$/, message: 'Только русские буквы' },
+							maxLength: { value: 40, message: 'Максимум 40 символов' },
+							pattern: { value: /^[а-яА-Я\s]*$/, message: 'Только русские буквы' },
 						})}
 						className='form form-name'
 						placeholder='Введите название услуги'
@@ -69,7 +69,7 @@ const CreateService = observer(({ show, onHide }) => {
 						as='textarea'
 						{...register('description', {
 							required: 'Поле обязательно к заполнению',
-							maxLength: { value: 255, message: 'Максимум 255 символов' },
+							maxLength: { value: 247, message: 'Максимум 247 символов' },
 						})}
 						className='form form-description'
 						placeholder='Описание'
