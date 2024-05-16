@@ -66,7 +66,7 @@ const history = useNavigate();
 								<div className='info-row'>
 									<p className='text'>
 										<b className='sb'>Режим работы отдела продаж: </b>
-										пн-пт с 7:00 до 18:00
+										пн-пт с 9:00 до 18:00
 									</p>
 								</div>
 

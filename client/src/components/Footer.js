@@ -25,7 +25,7 @@ const Footer = observer(() => {
 						</a>
 						<a onClick={() => history(ABOUT_ROUTE)}>г. Салават, ул. Южная д. 11</a>
 						<a onClick={() => history(ABOUT_ROUTE)}>+7 (991) 876-14-30</a>
-						<a onClick={() => history(ABOUT_ROUTE)}>пн-пт с 7:00 до 18:00</a>
+						<a onClick={() => history(ABOUT_ROUTE)}>пн-пт с 9:00 до 18:00</a>
 					</section>
 					<section className='footer-catalog'>
 						<p className='bold'>
