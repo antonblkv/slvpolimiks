@@ -29,7 +29,7 @@ const UpdateOrder = observer(({ show, onHide, order }) => {
 	return (
 		<Modal show={show} onHide={onHide} centered>
 			<div className='modal-header'>
-				<div className='modal-title'>Редактировать заказ</div>
+				<div className='modal-title'>Редактировать заявку</div>
 				<img className='modal-x' src={close} alt='Закрыть' onClick={onHide} />
 			</div>
 			<div className='modal-body'>

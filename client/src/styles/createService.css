@@ -125,17 +125,26 @@
 }
 
 .delete-type {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
 	display: flex;
 	margin-bottom: 10px;
 	flex-direction: row;
 	justify-content: space-between;
 	height: 40px;
+	width: 452px;
 	font-family: 'Montserrat';
 	font-size: 22px;
 	line-height: 1.5;
 	color: black;
 	border-radius: 8px;
 	background-color: rgba(98, 170, 200, 0.8);
+}
+
+.delete-type:hover {
+	white-space: normal;
+	height: 100%;
 }
 
 .delete-type-name {

@@ -1,6 +1,5 @@
 const { Order, User } = require('../models/models');
 const ApiError = require('../error/ApiError');
-const { where, or } = require('sequelize');
 
 class OrderController {
 	async create(req, res, next) {
