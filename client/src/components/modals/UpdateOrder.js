@@ -34,37 +34,45 @@ const UpdateOrder = observer(({ show, onHide, order }) => {
 			</div>
 			<div className='modal-body'>
 				<Form onSubmit={handleSubmit(onSubmit)}>
-					<select name='select-service' className='select-service' {...register('serviceId')}>
-						<option className='option-type' hidden value={0}>
-							Выберите услугу
-						</option>
-						{service.services.map(service => (
-							<option className='option-type' key={service.id} value={service.id}>
-								{service.name}
-							</option>
-						))}
-					</select>
+					<div className='select'>
+						<div className='form-select-wrapper'>
+							<select name='select-service' className='select-service' {...register('serviceId')}>
+								<option className='option-type' hidden value={0}>
+									Выберите услугу
+								</option>
+								{service.services.map(service => (
+									<option className='option-type' key={service.id} value={service.id}>
+										{service.name}
+									</option>
+								))}
+							</select>
+						</div>
+					</div>
 
-					<select name='select-status' className='select-status' {...register('status')}>
-						<option className='option-type' hidden value={0}>
-							Выберите статус
-						</option>
-						<option className='option-type' value='Зарегистрирована'>
-							Зарегистрирована
-						</option>
-						<option className='option-type' value='В очереди'>
-							В очереди
-						</option>
-						<option className='option-type' value='В работе'>
-							В работе
-						</option>
-						<option className='option-type' value='Выполнена'>
-							Выполнена
-						</option>
-						<option className='option-type' value='Отклонена'>
-							Отклонена
-						</option>
-					</select>
+					<div className='select'>
+						<div className='form-select-wrapper'>
+							<select name='select-status' className='select-status' {...register('status')}>
+								<option className='option-type' hidden value={0}>
+									Выберите статус
+								</option>
+								<option className='option-type' value='Зарегистрирована'>
+									Зарегистрирована
+								</option>
+								<option className='option-type' value='В очереди'>
+									В очереди
+								</option>
+								<option className='option-type' value='В работе'>
+									В работе
+								</option>
+								<option className='option-type' value='Выполнена'>
+									Выполнена
+								</option>
+								<option className='option-type' value='Отклонена'>
+									Отклонена
+								</option>
+							</select>
+						</div>
+					</div>
 
 					<Form.Control className='modal-button-edit' type='submit' value={'Изменить'} />
 				</Form>

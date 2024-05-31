@@ -4,7 +4,7 @@ const serviceController = require('../controllers/serviceController');
 const checkRole = require('../middleware/checkRoleMiddleware');
 
 router.post('/', checkRole('ADMIN'), serviceController.create);
-router.put('/', serviceController.update);
+router.put('/', checkRole('ADMIN'), serviceController.update);
 router.get('/', serviceController.getAll);
 router.get('/:id', serviceController.getOne);
 router.delete('/:id', checkRole('ADMIN'), serviceController.delete);

@@ -45,16 +45,20 @@ const UpdateService = observer(({ show, onHide, currentService }) => {
 			</div>
 			<div className='modal-body'>
 				<Form onSubmit={handleSubmit(onSubmit)}>
-					<select name='select-types' className='form-select' {...register('typeId')}>
-						<option className='option-type' hidden value={0}>
-							Выберите категорию
-						</option>
-						{service.types.map(type => (
-							<option className='option-type' key={type.id} value={type.id}>
-								{type.name}
-							</option>
-						))}
-					</select>
+					<div className='select'>
+						<div className='form-select-wrapper'>
+							<select name='select-types' className='form-select' {...register('typeId')}>
+								<option className='option-type' hidden value={0}>
+									Выберите категорию
+								</option>
+								{service.types.map(type => (
+									<option className='option-type' key={type.id} value={type.id}>
+										{type.name}
+									</option>
+								))}
+							</select>
+						</div>
+					</div>
 
 					<Form.Control
 						{...register('name', {
@@ -88,11 +92,7 @@ const UpdateService = observer(({ show, onHide, currentService }) => {
 					<div className='form-error'>{errors?.price && <p>{errors?.price?.message}</p>}</div>
 
 					<Form.Control className='form form-img' type='file' {...register('img')} />
-					<Form.Control
-						className='modal-button-edit'
-						type='submit'
-						value={'Изменить'}
-					/>
+					<Form.Control className='modal-button-edit' type='submit' value={'Изменить'} />
 				</Form>
 			</div>
 		</Modal>

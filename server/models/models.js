@@ -13,7 +13,9 @@ const User = sequelize.define('user', {
 const Order = sequelize.define('order', {
 	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 	comment: { type: DataTypes.STRING },
-	status: { type: DataTypes.ENUM('Зарегистрирована', 'В очереди', 'В работе', 'Выполнена', 'Отклонена'), defaultValue: 'Зарегистрирована' },
+	status: { type: DataTypes.ENUM('Зарегистрирована',
+	 'В очереди', 'В работе', 'Выполнена', 'Отклонена'),
+	  defaultValue: 'Зарегистрирована' },
 });
 
 const Service = sequelize.define('service', {
@@ -29,12 +31,6 @@ const Type = sequelize.define('type', {
 	name: { type: DataTypes.STRING, unique: true, allowNull: false },
 });
 
-const Portfolio = sequelize.define('portfolio', {
-	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-	name: { type: DataTypes.STRING, unique: true },
-	description: { type: DataTypes.STRING },
-});
-
 User.hasMany(Order);
 Order.belongsTo(User);
 
@@ -48,6 +44,5 @@ module.exports = {
 	User,
 	Order,
 	Service,
-	Type,
-	Portfolio,
+	Type
 };

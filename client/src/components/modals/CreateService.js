@@ -43,16 +43,20 @@ const CreateService = observer(({ show, onHide }) => {
 			</div>
 			<div className='modal-body'>
 				<Form onSubmit={handleSubmit(onSubmit)}>
-					<select name='select-types' className='form-select' {...register('typeId')}>
-						<option className='option-type' hidden>
-							Выберите категорию
-						</option>
-						{service.types.map(type => (
-							<option className='option-type' key={type.id} value={type.id}>
-								{type.name}
-							</option>
-						))}
-					</select>
+					<div className='select'>
+						<div className='form-select-wrapper'>
+							<select name='select-types' className='form-select' {...register('typeId')}>
+								<option className='option-type' hidden>
+									Выберите категорию
+								</option>
+								{service.types.map(type => (
+									<option className='option-type' key={type.id} value={type.id}>
+										{type.name}
+									</option>
+								))}
+							</select>
+						</div>
+					</div>
 
 					<Form.Control
 						{...register('name', {

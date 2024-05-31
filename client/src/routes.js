@@ -6,16 +6,9 @@ import Main from './pages/Main';
 import PersonalAccount from './pages/PersonalAccount';
 import Policy from './pages/Policy';
 import Portfolio from './pages/Portfolio';
-import {
-	ABOUT_ROUTE,
-	ADMIN_ROUTE,
-	CATALOG_ROUTE,
-	LK_ROUTE,
-	LOGIN_ROUTE,
-	MAIN_ROUTE,
-	PORTFOLIO_ROUTE,
-	REGISTRATION_ROUTE,
-	POLICY_ROUTE,
+import { ABOUT_ROUTE, ADMIN_ROUTE, CATALOG_ROUTE,
+	 LK_ROUTE, LOGIN_ROUTE, MAIN_ROUTE,
+	  PORTFOLIO_ROUTE, REGISTRATION_ROUTE, POLICY_ROUTE,
 } from './utils/consts';
 
 export const authRoutes = [
